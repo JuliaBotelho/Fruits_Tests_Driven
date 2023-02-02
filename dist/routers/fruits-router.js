@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var fruits_controller_1 = require("../controllers/fruits-controller");
+var schemaValidatorMiddleware_1 = require("../middlewares/schemaValidatorMiddleware");
+var fruit_schema_1 = require("../schemas/fruit-schema");
+var fruitsRouter = (0, express_1.Router)();
+fruitsRouter.get("/fruits", fruits_controller_1.getFruits);
+fruitsRouter.get("/fruits/:id", fruits_controller_1.getSpecificFruit);
+fruitsRouter.post("/fruits", (0, schemaValidatorMiddleware_1.validateSchemaMiddleware)(fruit_schema_1.fruitSchema), fruits_controller_1.createFruit);
+exports["default"] = fruitsRouter;
